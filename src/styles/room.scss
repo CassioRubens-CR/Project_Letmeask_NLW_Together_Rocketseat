@@ -90,6 +90,49 @@
         }
       }
 
+      .login-span-to-ask, .login-button-to-ask {
+        border-radius: 8px;
+        font-weight: 500;
+        background: #835afd;
+        color: #fff;
+        padding: 0 32px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        filter: brightness(0.9);
+
+        opacity: 0.8;
+        
+        .login-button-to-ask {
+          cursor: pointer;
+          height: 50px;
+          border: 1px solid #835afd;
+          padding: 0 6px;
+          
+          animation-name: animation-button;
+          animation-duration: 4s;
+          animation-iteration-count: infinite;
+
+          img {
+            padding: 0 12px;
+          }
+        }
+        
+        @keyframes animation-button {
+          0% {
+           background-color: #835afd; 
+          }
+          50% {
+            background-color: rgb(221, 109, 109) ; 
+          }
+          100% {
+            background-color: red; 
+          }
+        }
+      }
+
       > span {
         font-size: 14px;
         color: #737380;

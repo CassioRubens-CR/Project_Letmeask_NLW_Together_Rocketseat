@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
@@ -10,18 +11,28 @@ import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
 
 import '../styles/room.scss';
+import googleIconImg from '../assets/images/google-icon.svg';
+
 
 type RoomParams = {
   id: string;
 }
 
 export function Room() {
-  const { user } = useAuth();
+  const history = useHistory();
+  const { user, singInWithGoogle } = useAuth();
   const [newQuestion, setNewQuestion] = useState('');
   const params = useParams<RoomParams>();
 
   const roomId = params.id
   const { title, questions } = useRoom(roomId);
+
+  async function handleCreateRoom() {
+    if (!user) {
+      await singInWithGoogle()
+    }
+    history.push('/rooms/:id');
+  }
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -88,7 +99,15 @@ export function Room() {
                 <span>{user.name}</span>
               </div>
             ) : (
-              <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+              <span className="login-span-to-ask">Para enviar uma pergunta,
+                <button
+                className="login-button-to-ask"
+                onClick={handleCreateRoom}
+                >
+                  faça seu login aqui.
+                  <img src={googleIconImg} alt="Logo da Google" />
+                </button>
+              </span>
             )}
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
