@@ -10,11 +10,13 @@ import '../styles/auth.scss';
 import { FormEvent } from 'react';
 import { useState } from 'react';
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 
 export function Home() {
   const history = useHistory();
   const { user, singInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState("");
+  const {theme, toggleTheme} = useTheme();
 
   async function handleCreateRoom() {
     if (!user) {
@@ -46,7 +48,7 @@ export function Home() {
   }
 
   return (
-    <div id="page-auth">
+    <div id="page-auth" className={theme}>
       <aside>
         <img src={ilustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -55,6 +57,11 @@ export function Home() {
       <main>
         <div className="main-content">
           <img src={logoImg} alt="Letmeask" />
+          <button
+            onClick={toggleTheme}
+            className="button-ligth-dark"
+          >Light / Dark
+          </button>
           <button className="create-room" onClick={handleCreateRoom}>
             <img src={googleIconImg} alt="Logo da Google" />
             Crie sua sala com o Goggle

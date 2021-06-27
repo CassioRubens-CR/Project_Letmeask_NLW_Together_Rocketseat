@@ -13,6 +13,7 @@ import { useRoom } from '../hooks/useRoom';
 
 import '../styles/room.scss';
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 
 type RoomParams = {
   id: string;
@@ -25,12 +26,13 @@ export function AdminRoom() {
 
   const roomId = params.id
   const { title, questions } = useRoom(roomId);
+  const { theme, toggleTheme } = useTheme();
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
       endedAt: new Date(),
     });
-    
+
     history.push('/');
   }
 
@@ -53,10 +55,15 @@ export function AdminRoom() {
   }
 
   return (
-    <div id="page-room">
+    <div id="page-room" className={theme}>
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
+          <button
+            onClick={toggleTheme}
+            className="button-ligth-dark"
+          >Light / Dark
+          </button>
           <div>
             <RoomCode code={roomId} />
             <Button isOutlined onClick={handleEndRoom}>Encerrar Sala</Button>

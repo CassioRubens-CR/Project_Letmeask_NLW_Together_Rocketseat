@@ -8,11 +8,13 @@ import logoImg from '../assets/images/logo.svg';
 
 import '../styles/auth.scss';
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 
 export function NewRoom() {
   const { user } = useAuth()
   const history = useHistory();
   const [newRoom, setNewRoom] = useState("");
+  const {theme, toggleTheme} = useTheme();
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();
@@ -32,7 +34,7 @@ export function NewRoom() {
   }
 
   return (
-    <div id="page-auth">
+    <div id="page-auth" className={theme}>
       <aside>
         <img src={ilustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -41,7 +43,11 @@ export function NewRoom() {
       <main>
         <div className="main-content">
           <img src={logoImg} alt="Letmeask" />
-          {/* <h1>{user?.name}</h1> */}
+          <button
+            onClick={toggleTheme}
+            className="button-ligth-dark"
+          >Light / Dark
+          </button>
           <h2>Criar uma nova sala</h2>
           <form onSubmit={handleCreateRoom}>
             <input
