@@ -2,6 +2,8 @@
 
   &.dark {
     background: #333;
+    height: auto;
+    width: auto;
   }
 
   .button-ligth-dark {
@@ -185,4 +187,41 @@
       margin-top: 32px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    font-size: x-large;
+    padding: 5px 0;
+    height: auto;
+  
+    header {
+      padding: 0;
+      div {
+        flex-direction: column;
+        padding: 10px;
+      }
+    }
+
+    main {
+      margin: 12px;
+      
+      .room-title {
+        flex-direction: column;
+        margin: 12px;
+        
+        h1 {
+          font-size: medium;
+        }
+      }
+
+      .login-span-to-ask {
+        font-size: medium;
+      }
+    }
+    
+  }
+
+
+
+
 }

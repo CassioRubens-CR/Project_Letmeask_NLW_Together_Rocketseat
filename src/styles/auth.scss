@@ -170,4 +170,40 @@
       margin-left: 16px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    font-size: x-large;
+    padding: 5px 0;
+    height: auto;
+    
+    aside {
+      flex-direction: column;
+      width: auto;
+      font-size: x-large;
+      padding: 5px 0;
+
+      img {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      strong, p {
+        font-size: x-large;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+    }
+
+    main {
+      flex-direction: column;
+      width: auto;
+    }
+
+    .main-content > img {
+      margin-top: 16px;
+    }
+  }
 }
